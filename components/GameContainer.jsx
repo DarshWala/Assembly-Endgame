@@ -1,4 +1,11 @@
+import GameInfo from "./GameInfo"
 
 export default function GameContainer(){
-    return <h1>main game</h1>
+    return (
+        <>
+            <div className="game-container">
+                <GameInfo/>
+            </div>
+        </>
+    )
 }

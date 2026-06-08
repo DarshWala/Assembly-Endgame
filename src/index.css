@@ -1,6 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
 
 body{
-    background-color: rgb(43, 56, 69);
+    background-color: #6a8a82;
     font-family: 'Hanken Grotesk', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container{
+    background-color: #282726;
+    width: 650px;
+    height: 700px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px   ;
+}
+
+.heading{
+    font-size: 35px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #F9F4DA;
+    font-weight: 500;
+}
+
+.description{
+    font-size: 15px;
+    color: #8e8e8e;
 }
