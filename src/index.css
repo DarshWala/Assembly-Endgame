@@ -18,7 +18,8 @@ body{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px   ;
+    gap: 12px;
+
 }
 
 .heading{
@@ -33,4 +34,40 @@ body{
 .description{
     font-size: 15px;
     color: #8e8e8e;
+}
+
+.status{
+    background-color: #10A95B;
+    width: 300px;
+    height: auto;
+    min-height: 20px;
+    border-radius: 7px;
+}
+
+.status > h2{
+    color: #F9F4DA;    
+    font-size: 20px;
+    margin: 0;
+}
+
+.status > p{
+    color: #F9F4DA;
+    font-size: 1rem;
+    margin: 2px;
+}
+
+.languages-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+.chip {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
 }
