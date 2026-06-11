@@ -15,9 +15,7 @@ export default function GameContainer() {
             prevLetters.includes(letter) ? 
                 prevLetters : 
                 [...prevLetters, letter]
-        )
-
-        
+        )        
     }
 
 
@@ -69,6 +67,15 @@ export default function GameContainer() {
     );
   });
 
+
+  const wordDisplay = characters.map((char, index) => (
+            <span key={index} style={stylesForChar}>
+              {(guessedLetters.includes(char) && characters.includes(char))
+              ? char.toLocaleUpperCase() 
+              : ""}
+            </span>
+          ))
+
   return (
     <>
       <div className="game-container">
@@ -76,12 +83,7 @@ export default function GameContainer() {
         <Status />
         <section className="languages-container">{languageElements}</section>
         <section className="word-section">
-          {characters.map((char, index) => (
-            <span key={index} style={stylesForChar}>
-              {" "}
-              {char.toUpperCase()}{" "}
-            </span>
-          ))}
+          {wordDisplay}
         </section>
 
         {/* keyboard section */}
