@@ -8,6 +8,10 @@ body{
     align-items: center;
 }
 
+button{
+    cursor: pointer;
+}
+
 .game-container{
     background-color: #282726;
     width: 650px;
@@ -18,7 +22,7 @@ body{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
+    gap: 30px;
 
 }
 
@@ -41,7 +45,7 @@ body{
     width: 300px;
     height: auto;
     min-height: 20px;
-    border-radius: 7px;
+    border-radius: 4px;
 }
 
 .status > h2{
@@ -70,4 +74,56 @@ body{
     border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
+}
+
+.word-section{
+    display: flex;
+    gap: 3px;
+}
+
+.keyboard{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 480px;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    
+}
+
+.keyboard > .default{
+    background-color: #FCBA29;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+}
+
+.keyboard > .wrong{
+    background-color: #EC5D49;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+}
+
+.keyboard > .correct{
+    background-color: #10A95B;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+
+}
+
+button.new-game {
+    background-color: #11B5E5;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    width: 225px;
+    height: 40px;
+    padding: 6px 12px;
+    display: block;
+    margin-inline: auto;
+    cursor: pointer;
 }
