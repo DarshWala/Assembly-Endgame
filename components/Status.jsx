@@ -1,4 +1,8 @@
 export default function Status(){
+
+    console.log();
+    
+    
     return (
         <main>
             <div className="status">

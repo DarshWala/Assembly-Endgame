@@ -40,7 +40,20 @@ button{
     color: #8e8e8e;
 }
 
-.status{
+/* status styling starts*/
+
+.game-won,
+.game-lost,
+.one-wrong,
+.two-wrong,
+.three-wrong,
+.four-wrong,
+.five-wrong,
+.six-wrong,
+.seven-wrong,
+.eight-wrong,
+.default
+{
     background-color: #10A95B;
     width: 300px;
     height: auto;
@@ -48,17 +61,77 @@ button{
     border-radius: 4px;
 }
 
-.status > h2{
+.game-won > h2,
+.game-lost > h2,
+.one-wrong > h2 ,
+.two-wrong > h2,
+.three-wrong > h2,
+.four-wrong > h2,
+.five-wrong > h2,
+.six-wrong > h2,
+.seven-wrong > h2,
+.eight-wrong > h2,
+.default > h2
+{
     color: #F9F4DA;    
     font-size: 20px;
     margin: 0;
 }
 
-.status > p{
-    color: #F9F4DA;
+.game-won > p,
+.game-lost > p,
+.one-wrong > p,
+.two-wrong > p,
+.three-wrong > p,
+.four-wrong > p,
+.five-wrong > p,
+.six-wrong > p,
+.seven-wrong > p,
+.eight-wrong > p,
+.default > p
+{
+    
+    color: #F9F4DA; 
     font-size: 1rem;
     margin: 2px;
 }
+
+.game-lost{
+    background-color: #ff0000;
+}
+
+.default{
+    background-color: #81c277;
+}
+
+.one-wrong{
+    background-color: #FCBA29;
+}
+
+.two-wrong{
+    background-color: #fc9f23;
+}
+
+.three-wrong{
+    background-color: #fc841d ;
+}
+
+.four-wrong{
+    background-color: #fd6a17;
+}
+
+.five-wrong{
+    background-color: #fd4f11;
+}
+
+.six-wrong{
+    background-color: #fe350b;
+}
+
+.seven-wrong{
+    background-color: #fe1a05;
+}
+
 
 .languages-container{
     display: flex;
