@@ -7,7 +7,7 @@ export default function LanguagesChips(props){
     return(
         <>
             {/* <div className="chip"> */}
-                <div className="chip" style={styles} >{props.name}</div>
+                <span className= {props.class} style={styles} >{props.name}</span>
             {/* </div> */}
         </>
     )

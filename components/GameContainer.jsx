@@ -7,28 +7,34 @@ import { languages } from "./languages";
 
 export default function GameContainer() {
   const [currentWord, SetCurrentWord] = React.useState("react");
-  
+
   const [guessedLetters, setGuessedLetters] = React.useState([]);
 
-    function guessed(letter , index) {
-        setGuessedLetters(prevLetters => 
-            prevLetters.includes(letter) ? 
-                prevLetters : 
-                [...prevLetters, letter]
-        )        
-    }
+  function guessed(letter, index) {
+    setGuessedLetters((prevLetters) =>
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter],
+    );
+  }
 
-
+  const wrongGuessesCount = guessedLetters.filter(
+    (letter) => !currentWord.includes(letter),
+  ).length;
+  console.log(wrongGuessesCount);
 
   // The language elements
-  const languageElements = languages.map((lang, index) => (
-    <LanguagesChips
-      key={lang.name}
-      name={lang.name}
-      bgColor={lang.backgroundColor}
-      color={lang.color}
-    />
-  ));
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessesCount
+
+    return (
+      <LanguagesChips
+        key={lang.name}
+        class={`chip ${isLanguageLost ? "lost" : ""}`}
+        name={lang.name}
+        bgColor={lang.backgroundColor}
+        color={lang.color}
+      />
+    );
+  });
 
   const characters = [...currentWord];
 
@@ -42,13 +48,10 @@ export default function GameContainer() {
     height: "40px",
     borderBottom: "1px solid #F9F4DA",
     fontSize: "1.125rem",
-    // paddingTop : "10px"
   };
 
   const letters = "abcdefghijklmnopqrstuvwxyz";
   const lettersArray = [...letters];
-
-
 
   const buttonsForKeyboard = lettersArray.map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
@@ -57,7 +60,7 @@ export default function GameContainer() {
     const className = isCorrect ? "correct" : isWrong ? "wrong" : "default";
 
     return (
-      <button 
+      <button
         className={className}
         key={index}
         onClick={() => guessed(letter, index)}
@@ -67,14 +70,13 @@ export default function GameContainer() {
     );
   });
 
-
   const wordDisplay = characters.map((char, index) => (
-            <span key={index} style={stylesForChar}>
-              {(guessedLetters.includes(char) && characters.includes(char))
-              ? char.toLocaleUpperCase() 
-              : ""}
-            </span>
-          ))
+    <span key={index} style={stylesForChar}>
+      {guessedLetters.includes(char) && characters.includes(char)
+        ? char.toLocaleUpperCase()
+        : ""}
+    </span>
+  ));
 
   return (
     <>
@@ -82,14 +84,10 @@ export default function GameContainer() {
         <GameInfo />
         <Status />
         <section className="languages-container">{languageElements}</section>
-        <section className="word-section">
-          {wordDisplay}
-        </section>
+        <section className="word-section">{wordDisplay}</section>
 
         {/* keyboard section */}
-        <section className="keyboard">
-          {buttonsForKeyboard}
-        </section>
+        <section className="keyboard">{buttonsForKeyboard}</section>
 
         <button className="new-game">New Game</button>
       </div>

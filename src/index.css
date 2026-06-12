@@ -69,11 +69,26 @@ button{
     margin-top: 10px;
 }
 
-.chip {
+span.chip {
     padding: 6px 10px;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+span.chip.lost::before {
+    content: "💀";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 0.85rem;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .word-section{
@@ -115,6 +130,8 @@ button{
     border-radius: 4px;
 
 }
+
+
 
 button.new-game {
     background-color: #11B5E5;
