@@ -4,6 +4,7 @@ import GameInfo from "./GameInfo";
 import Status from "./Status";
 import LanguagesChips from "./LanguagesChips";
 import { languages } from "./languages";
+import { words } from "./words";
 
 export default function GameContainer() {
   const [currentWord, SetCurrentWord] = React.useState("react");
@@ -56,6 +57,7 @@ export default function GameContainer() {
 
     return (
       <button
+        
         disabled={isGameOver}
         aria-disabled={guessedLetters.includes(letter)}
         aria-label={`Letter ${letter}`}
@@ -84,15 +86,19 @@ export default function GameContainer() {
   };
   const wordDisplay = characters.map((char, index) => (
     <span key={index} style={stylesForChar}>
-      {guessedLetters.includes(char) && characters.includes(char)
+      {((guessedLetters.includes(char) && characters.includes(char)) || isGameOver)
         ? char.toLocaleUpperCase()
         : ""}
+
+        
     </span>
   ));
   //-------missing word finish -----------------------------------------------------//
 
-  function getGameStatus() {
-    if (isGameWon) {
+
+//- Game Status function ---------------------------------------
+function getGameStatus() {
+  if (isGameWon) {
       return {
         classForStatus: "game-won",
         statusHeading: "Congratulations!",
@@ -106,7 +112,7 @@ export default function GameContainer() {
         statusPara: "You better start learning Assembly",
       };
     }
-
+    
     const statuses = [
       {
         classForStatus: "default",
@@ -149,14 +155,34 @@ export default function GameContainer() {
         statusPara: "One more wrong guess and it's over.",
       },
     ];
-
+    
     return statuses[wrongGuessesCount] || statuses[0];
   }
 
+
+  
   const { classForStatus, statusHeading, statusPara } = getGameStatus();
+  //- Game Status function end ---------------------------------------
 
-  //-----game container return--
 
+
+  function newGame(){
+    SetCurrentWord(word => {
+      const random = Math.ceil(Math.random() * 480)
+        if(word === words[random]){
+          return words[random + 1];
+        }else{
+          return words[random]
+        }
+    }      
+    )
+
+    setGuessedLetters([]) 
+
+
+  }
+  
+  //! -----game container return--
   return (
     <>
       <div className="game-container">
@@ -171,7 +197,7 @@ export default function GameContainer() {
           </div>
         </section>
         {
-          //-------- Status ------------//
+          //-------- Status ------------//'
         }{" "}
         <section className="languages-container">{languageElements}</section>
         <section className="word-section">{wordDisplay}</section>
@@ -199,7 +225,11 @@ export default function GameContainer() {
         <section aria-live="polite" role="status" className="keyboard">
           {buttonsForKeyboard}
         </section>
-        {isGameOver && <button className="new-game">New Game</button>}
+
+        {
+          //- GAME OVER BUTTON
+        }
+        {isGameOver && <button onClick={newGame} className="new-game">New Game</button>}
       </div>
     </>
   );
