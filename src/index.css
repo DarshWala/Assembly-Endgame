@@ -204,6 +204,14 @@ span.chip.lost::before {
 
 }
 
+.keyboard > .correct:disabled,
+.keyboard > .wrong:disabled,
+.keyboard > .default:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: black;
+}
+
 
 
 button.new-game {
@@ -216,4 +224,16 @@ button.new-game {
     display: block;
     margin-inline: auto;
     cursor: pointer;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

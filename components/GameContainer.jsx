@@ -10,7 +10,7 @@ export default function GameContainer() {
   const characters = [...currentWord];
 
   const [guessedLetters, setGuessedLetters] = React.useState([]);
-  
+
   const letters = "abcdefghijklmnopqrstuvwxyz";
   const lettersArray = [...letters];
 
@@ -18,14 +18,11 @@ export default function GameContainer() {
     (letter) => !currentWord.includes(letter),
   ).length;
 
-  
-  
-  
-  const isGameWon = currentWord.split("").
-    every(letter => guessedLetters.includes(letter))
-  const isGameLost = (wrongGuessesCount >= languages.length - 1)
-  const isGameOver = isGameWon || isGameLost
-  
+  const isGameWon = currentWord
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+  const isGameLost = wrongGuessesCount >= languages.length - 1;
+  const isGameOver = isGameWon || isGameLost;
 
   function guessed(letter, index) {
     setGuessedLetters((prevLetters) =>
@@ -33,13 +30,10 @@ export default function GameContainer() {
     );
   }
 
-  
-
-
   //------ language chips --------------------//
   const languageElements = languages.map((lang, index) => {
-    const isLanguageLost = index < wrongGuessesCount
-    
+    const isLanguageLost = index < wrongGuessesCount;
+
     return (
       <LanguagesChips
         key={lang.name}
@@ -47,34 +41,35 @@ export default function GameContainer() {
         name={lang.name}
         bgColor={lang.backgroundColor}
         color={lang.color}
-        />
-      );
-    });
-    
-    
-//------ language chips finish --------------------//
-  
+      />
+    );
+  });
+
+  //------ language chips finish --------------------//
+
   // ------- keyboard -------------------------------------------------//
   const buttonsForKeyboard = lettersArray.map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
     const isCorrect = isGuessed && currentWord.includes(letter);
     const isWrong = isGuessed && !currentWord.includes(letter);
     const className = isCorrect ? "correct" : isWrong ? "wrong" : "default";
-    
+
     return (
       <button
-      className={className}
-      key={index}
-      onClick={() => guessed(letter, index)}
+        disabled={isGameOver}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
+        className={className}
+        key={index}
+        onClick={() => guessed(letter, index)}
       >
         {letter.toUpperCase()}
       </button>
     );
   });
-  
+
   //-------keyboard finish --------------------------------------------------//
-  
-  
+
   //-------missing word -----------------------------------------------------//
   const stylesForChar = {
     display: "flex",
@@ -94,25 +89,65 @@ export default function GameContainer() {
         : ""}
     </span>
   ));
-//-------missing word finish -----------------------------------------------------//
+  //-------missing word finish -----------------------------------------------------//
 
   function getGameStatus() {
     if (isGameWon) {
-      return { classForStatus: "game-won", statusHeading: "Congratulations!", statusPara: "You're not as dumb as I thought" };
+      return {
+        classForStatus: "game-won",
+        statusHeading: "Congratulations!",
+        statusPara: "You're not as dumb as I thought",
+      };
     }
     if (isGameLost) {
-      return { classForStatus: "game-lost", statusHeading: "I told you!!", statusPara: "You better start learning Assembly" };
+      return {
+        classForStatus: "game-lost",
+        statusHeading: "I told you!!",
+        statusPara: "You better start learning Assembly",
+      };
     }
 
     const statuses = [
-      { classForStatus: "default", statusHeading: "Welcome!", statusPara: "Hope you're smart enough" },
-      { classForStatus: "one-wrong", statusHeading: "First Strike", statusPara: "You can do without HTML can't you" },
-      { classForStatus: "two-wrong", statusHeading: "Heyy! Think", statusPara: "Farewell CSS and HTML🫡" },
-      { classForStatus: "three-wrong", statusHeading: "Ouch!!", statusPara: "There go the basics of web dev" },
-      { classForStatus: "four-wrong", statusHeading: "Getting dangerous", statusPara: "You're halfway, if you even realise that." },
-      { classForStatus: "five-wrong", statusHeading: "You should quit", statusPara: "Your language pool is shrinking fast." },
-      { classForStatus: "six-wrong", statusHeading: "Close call", statusPara: "Almost out of luck!" },
-      { classForStatus: "seven-wrong", statusHeading: "Should've quit when I told you", statusPara: "One more wrong guess and it's over." },
+      {
+        classForStatus: "default",
+        statusHeading: "Welcome!",
+        statusPara: "Hope you're smart enough",
+      },
+      {
+        classForStatus: "one-wrong",
+        statusHeading: "First Strike",
+        statusPara: "You can do without HTML can't you",
+      },
+      {
+        classForStatus: "two-wrong",
+        statusHeading: "Heyy! Think",
+        statusPara: "Farewell CSS and HTML🫡",
+      },
+      {
+        classForStatus: "three-wrong",
+        statusHeading: "Ouch!!",
+        statusPara: "There go the basics of web dev",
+      },
+      {
+        classForStatus: "four-wrong",
+        statusHeading: "Getting dangerous",
+        statusPara: "You're halfway, if you even realise that.",
+      },
+      {
+        classForStatus: "five-wrong",
+        statusHeading: "You should quit",
+        statusPara: "Your language pool is shrinking fast.",
+      },
+      {
+        classForStatus: "six-wrong",
+        statusHeading: "Close call",
+        statusPara: "Almost out of luck!",
+      },
+      {
+        classForStatus: "seven-wrong",
+        statusHeading: "Should've quit when I told you",
+        statusPara: "One more wrong guess and it's over.",
+      },
     ];
 
     return statuses[wrongGuessesCount] || statuses[0];
@@ -120,28 +155,51 @@ export default function GameContainer() {
 
   const { classForStatus, statusHeading, statusPara } = getGameStatus();
 
-//-----game container return--
+  //-----game container return--
 
   return (
     <>
       <div className="game-container">
         <GameInfo />
-
-{//-------- Status ------------//        
-}        <section>
-            <div className= {classForStatus}>
-                <h2>{statusHeading}</h2>
-                <p>{statusPara}</p>
-            </div>
+        {
+          //-------- Status ------------//
+        }{" "}
+        <section>
+          <div className={classForStatus}>
+            <h2>{statusHeading}</h2>
+            <p>{statusPara}</p>
+          </div>
         </section>
-{//-------- Status ------------//        
-}        <section className="languages-container">{languageElements}</section>
+        {
+          //-------- Status ------------//
+        }{" "}
+        <section className="languages-container">{languageElements}</section>
         <section className="word-section">{wordDisplay}</section>
+        {
+          //! Screen Reader only section ----------//
+        }
+        <section className="sr-only" aria-live="polite" role="status">
+          <p>
+            Current word:{" "}
+            {currentWord
+              .split("")
+              .map((letter) =>
+                guessedLetters.includes(letter) ? letter + "." : "blank.",
+              )
+              .join(" ")}
+          </p>
+        </section>
+        {
+          //! Screen Reader only section end ----------//
+        }
 
-        {/* keyboard section */}
-        <section className="keyboard">{buttonsForKeyboard}</section>
-
-       { isGameOver && <button className="new-game">New Game</button>}
+        {
+          //- Keyboard section -----------------------
+        }
+        <section aria-live="polite" role="status" className="keyboard">
+          {buttonsForKeyboard}
+        </section>
+        {isGameOver && <button className="new-game">New Game</button>}
       </div>
     </>
   );
