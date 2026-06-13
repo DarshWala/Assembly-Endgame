@@ -6,6 +6,8 @@ import LanguagesChips from "./LanguagesChips";
 import { languages } from "./languages";
 import { words } from "./words";
 
+import ReactConfetti from "react-confetti";
+
 export default function GameContainer() {
   const [currentWord, SetCurrentWord] = React.useState("react");
   const characters = [...currentWord];
@@ -185,6 +187,10 @@ function getGameStatus() {
   //! -----game container return--
   return (
     <>
+      {isGameWon && <ReactConfetti 
+        recycle = {false}
+        numberOfPieces={1000}
+      />}
       <div className="game-container">
         <GameInfo />
         {
